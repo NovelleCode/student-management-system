@@ -27,14 +27,21 @@ public class StudentRest {
 
     @Path("{id}")
     @GET
-    public Response findStudentById(@PathParam("id") Long id) {
+    public Response findStudentById(@PathParam("id") Long id) throws WebApplicationException {
         Student foundStudent = studentService.findStudentById(id);
         return Response.ok(foundStudent).build();
     }
 
+    @Path("get-all-students-by-lastname")
+    @GET
+    public Response findStudentByLastName(@QueryParam("lastName") String lastName) throws WebApplicationException {
+        List<Student> foundStudents = studentService.findAllStudentsByLastName(lastName);
+        return Response.ok(foundStudents).build();
+    }
+
     @Path("")
     @GET
-    public Response getAllStudents() {
+    public Response getAllStudents() throws WebApplicationException {
         List<Student> allStudents = studentService.getAllStudents();
         return Response.ok(allStudents).build();
     }
@@ -48,7 +55,7 @@ public class StudentRest {
 
     @Path("{id}")
     @DELETE
-    public Response deleteStudent(@PathParam("id") Long id) {
+    public Response deleteStudent(@PathParam("id") Long id) throws WebApplicationException {
         studentService.deleteStudent(id);
         return Response.ok().build();
     }
