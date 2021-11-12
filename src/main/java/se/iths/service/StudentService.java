@@ -20,6 +20,13 @@ public class StudentService {
         return student;
     }
 
+    public Student findStudentById(Long id) {
+        Student foundStudent = em.find(Student.class, id);
+        if(foundStudent == null)
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return foundStudent;
+    }
+
     public List<Student> getAllStudents() {
         List<Student> allStudents = em.createQuery("select s from Student s", Student.class).getResultList();
         if (allStudents.isEmpty())
@@ -29,5 +36,10 @@ public class StudentService {
 
     public Student updateStudent(Student student) {
         return em.merge(student);
+    }
+
+    public void deleteStudent(Long id) {
+        Student foundStudent = findStudentById(id);
+        em.remove(foundStudent);
     }
 }

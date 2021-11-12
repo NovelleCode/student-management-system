@@ -25,6 +25,13 @@ public class StudentRest {
         return Response.ok(student).build();
     }
 
+    @Path("{id}")
+    @GET
+    public Response findStudentById(@PathParam("id") Long id) {
+        Student foundStudent = studentService.findStudentById(id);
+        return Response.ok(foundStudent).build();
+    }
+
     @Path("")
     @GET
     public Response getAllStudents() {
@@ -37,5 +44,12 @@ public class StudentRest {
     public Response updateStudent(Student student) {
         studentService.updateStudent(student);
         return Response.ok(student).build();
+    }
+
+    @Path("{id}")
+    @DELETE
+    public Response deleteStudent(@PathParam("id") Long id) {
+        studentService.deleteStudent(id);
+        return Response.ok().build();
     }
 }
