@@ -53,6 +53,13 @@ public class StudentRest {
         return Response.ok(student).build();
     }
 
+    @Path("email/{id}")
+    @PATCH
+    public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email) {
+        Student updatedStudent = studentService.updateStudentEmail(id, email);
+        return Response.ok(updatedStudent).build();
+    }
+
     @Path("{id}")
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id) throws WebApplicationException {

@@ -51,4 +51,10 @@ public class StudentService {
         Student foundStudent = findStudentById(id);
         em.remove(foundStudent);
     }
+
+    public Student updateStudentEmail(Long id, String email) {
+        Student foundStudent = findStudentById(id);
+        foundStudent.setEmail(email);
+        return foundStudent;
+    }
 }
