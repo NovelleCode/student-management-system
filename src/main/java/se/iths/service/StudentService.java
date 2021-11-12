@@ -26,4 +26,8 @@ public class StudentService {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         return allStudents;
     }
+
+    public Student updateStudent(Student student) {
+        return em.merge(student);
+    }
 }

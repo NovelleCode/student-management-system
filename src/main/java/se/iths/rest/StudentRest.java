@@ -31,4 +31,11 @@ public class StudentRest {
         List<Student> allStudents = studentService.getAllStudents();
         return Response.ok(allStudents).build();
     }
+
+    @Path("")
+    @PUT
+    public Response updateStudent(Student student) {
+        studentService.updateStudent(student);
+        return Response.ok(student).build();
+    }
 }
