@@ -4,7 +4,6 @@ import se.iths.entity.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -36,8 +35,11 @@ public class StudentService {
     }
 
     public List<Student> findAllStudentsByLastName(String lastName) {
-        TypedQuery<Student> query = em.createQuery("select s from Student s where s.lastName = ?1", Student.class);
-        List<Student> foundStudents = query.setParameter(1, lastName).getResultList();
+        List<Student> foundStudents = em
+                .createQuery("select s from Student s where s.lastName = ?1", Student.class)
+                .setParameter(1, lastName)
+                .getResultList();
+
         if(foundStudents.isEmpty())
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         return foundStudents;
