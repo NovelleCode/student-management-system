@@ -1,6 +1,7 @@
 package se.iths.rest;
 
 import se.iths.entity.Student;
+import se.iths.exception.StudentAlreadyExistsException;
 import se.iths.exception.StudentNotFoundException;
 import se.iths.service.StudentService;
 
@@ -27,7 +28,7 @@ public class StudentRest {
 
     @Path("")
     @POST
-    public Response createStudent(Student student) throws WebApplicationException {
+    public Response createStudent(Student student) throws StudentAlreadyExistsException {
         studentService.createStudent(student);
         UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(Long.toString(student.getId()));
         return Response.created(uriBuilder.build())
