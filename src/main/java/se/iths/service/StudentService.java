@@ -1,13 +1,12 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
+import se.iths.exception.StudentAlreadyExistsException;
 import se.iths.exception.StudentNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Transactional
@@ -18,7 +17,7 @@ public class StudentService {
 
     public Student createStudent(Student student) {
         if(studentAlreadyExists(student))
-            throw new WebApplicationException(Response.Status.CONFLICT);
+            throw new StudentAlreadyExistsException("Student with this information already exists in database.");
         em.persist(student);
         return student;
     }
