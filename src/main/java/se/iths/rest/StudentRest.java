@@ -26,7 +26,7 @@ public class StudentRest {
 
     @Path("")
     @POST
-    public Response createStudent(Student student) {
+    public Response createStudent(Student student) throws WebApplicationException {
         studentService.createStudent(student);
         UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(Long.toString(student.getId()));
         return Response.created(uriBuilder.build())
@@ -68,7 +68,7 @@ public class StudentRest {
 
     @Path("email/{id}")
     @PATCH
-    public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email) {
+    public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email)  throws WebApplicationException {
         Student updatedStudent = studentService.updateStudentEmail(id, email);
         return Response.ok(updatedStudent)
                 .build();

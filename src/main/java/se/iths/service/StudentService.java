@@ -16,6 +16,8 @@ public class StudentService {
     EntityManager em;
 
     public Student createStudent(Student student) {
+        if(studentAlreadyExists(student))
+            throw new WebApplicationException(Response.Status.CONFLICT);
         em.persist(student);
         return student;
     }
@@ -58,5 +60,13 @@ public class StudentService {
         Student foundStudent = findStudentById(id);
         foundStudent.setEmail(email);
         return foundStudent;
+    }
+
+    private boolean studentAlreadyExists(Student student) {
+        List<Student> studentExists = em
+                .createQuery("select s from Student s where s.firstName = ?1 and s.lastName = ?2 and s.email = ?3", Student.class)
+                .setParameter(1, student.getFirstName()).setParameter(2, student.getLastName()).setParameter(3, student.getEmail())
+                .getResultList();
+        return !studentExists.isEmpty();
     }
 }
