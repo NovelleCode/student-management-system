@@ -1,6 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
+import se.iths.exception.StudentNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,14 +26,14 @@ public class StudentService {
     public Student findStudentById(Long id) {
         Student foundStudent = em.find(Student.class, id);
         if (foundStudent == null)
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            throw new StudentNotFoundException("Student with id: " + id + ", is not found.");
         return foundStudent;
     }
 
     public List<Student> getAllStudents() {
         List<Student> allStudents = em.createQuery("select s from Student s", Student.class).getResultList();
         if (allStudents.isEmpty())
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            throw new StudentNotFoundException("No students in database yet.");
         return allStudents;
     }
 
