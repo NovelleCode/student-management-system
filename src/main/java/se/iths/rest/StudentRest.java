@@ -1,6 +1,7 @@
 package se.iths.rest;
 
 import se.iths.entity.Student;
+import se.iths.exception.StudentNotFoundException;
 import se.iths.service.StudentService;
 
 import javax.inject.Inject;
@@ -26,7 +27,7 @@ public class StudentRest {
 
     @Path("")
     @POST
-    public Response createStudent(Student student) throws WebApplicationException {
+    public Response createStudent(Student student) throws StudentNotFoundException {
         studentService.createStudent(student);
         UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(Long.toString(student.getId()));
         return Response.created(uriBuilder.build())
@@ -36,7 +37,7 @@ public class StudentRest {
 
     @Path("{id}")
     @GET
-    public Response findStudentById(@PathParam("id") Long id) throws WebApplicationException {
+    public Response findStudentById(@PathParam("id") Long id) throws StudentNotFoundException {
         Student foundStudent = studentService.findStudentById(id);
         return Response.ok(foundStudent)
                 .build();
@@ -44,7 +45,7 @@ public class StudentRest {
 
     @Path("get-all-students-by-lastname")
     @GET
-    public Response findStudentByLastName(@QueryParam("lastName") String lastName) throws WebApplicationException {
+    public Response findStudentByLastName(@QueryParam("lastName") String lastName) throws StudentNotFoundException {
         List<Student> foundStudents = studentService.findAllStudentsByLastName(lastName);
         return Response.ok(foundStudents)
                 .build();
@@ -52,7 +53,7 @@ public class StudentRest {
 
     @Path("")
     @GET
-    public Response getAllStudents() throws WebApplicationException {
+    public Response getAllStudents() throws StudentNotFoundException {
         List<Student> allStudents = studentService.getAllStudents();
         return Response.ok(allStudents)
                 .build();
@@ -60,7 +61,7 @@ public class StudentRest {
 
     @Path("")
     @PUT
-    public Response updateStudent(Student student) {
+    public Response updateStudent(Student student) throws StudentNotFoundException {
         studentService.updateStudent(student);
         return Response.ok(student)
                 .build();
@@ -68,7 +69,7 @@ public class StudentRest {
 
     @Path("email/{id}")
     @PATCH
-    public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email)  throws WebApplicationException {
+    public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email)  throws StudentNotFoundException {
         Student updatedStudent = studentService.updateStudentEmail(id, email);
         return Response.ok(updatedStudent)
                 .build();
@@ -76,7 +77,7 @@ public class StudentRest {
 
     @Path("{id}")
     @DELETE
-    public Response deleteStudent(@PathParam("id") Long id) throws WebApplicationException {
+    public Response deleteStudent(@PathParam("id") Long id) throws StudentNotFoundException {
         studentService.deleteStudent(id);
         return Response.ok().build();
     }

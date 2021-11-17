@@ -26,7 +26,7 @@ public class StudentService {
     public Student findStudentById(Long id) {
         Student foundStudent = em.find(Student.class, id);
         if (foundStudent == null)
-            throw new StudentNotFoundException("Student with id: " + id + ", is not found.");
+            throw new StudentNotFoundException("No student found with id: " + id);
         return foundStudent;
     }
 
@@ -44,11 +44,13 @@ public class StudentService {
                 .getResultList();
 
         if(foundStudents.isEmpty())
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            throw new StudentNotFoundException("No student(s) found with lastname: " + lastName);
         return foundStudents;
     }
 
     public Student updateStudent(Student student) {
+        if (findStudentById(student.getId()) == null)
+            throw new StudentNotFoundException("No student found with id: " + student.getId());
         return em.merge(student);
     }
 
