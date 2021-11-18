@@ -41,7 +41,7 @@ public class StudentRest {
         return Response.ok(foundStudent).build();
     }
 
-    @Path("get-all-students-by-lastname")
+    @Path("get-all-by-lastname")
     @GET
     public Response findStudentByLastName(@QueryParam("lastName") String lastName) throws StudentNotFoundException {
         List<Student> foundStudents = studentService.findAllStudentsByLastName(lastName);
