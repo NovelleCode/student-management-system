@@ -42,7 +42,6 @@ public class StudentService {
                 .createQuery("select s from Student s where s.lastName = ?1", Student.class)
                 .setParameter(1, lastName)
                 .getResultList();
-
         if (foundStudents.isEmpty())
             throw new StudentNotFoundException(Response.Status.OK, "No student(s) found with lastname: " + lastName);
         return foundStudents;
