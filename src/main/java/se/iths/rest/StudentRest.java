@@ -73,6 +73,6 @@ public class StudentRest {
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id) throws StudentNotFoundException {
         studentService.deleteStudent(id);
-        return Response.ok().build();
+        return Response.noContent().build();
     }
 }
