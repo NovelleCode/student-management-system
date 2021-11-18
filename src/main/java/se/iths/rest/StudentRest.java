@@ -70,7 +70,7 @@ public class StudentRest {
 
     @Path("email/{id}")
     @PATCH
-    public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email)  throws StudentNotFoundException {
+    public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email) throws StudentNotFoundException {
         Student updatedStudent = studentService.updateStudentEmail(id, email);
         return Response.ok(updatedStudent)
                 .build();
@@ -80,6 +80,7 @@ public class StudentRest {
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id) throws StudentNotFoundException {
         studentService.deleteStudent(id);
-        return Response.ok().build();
+        return Response.ok()
+                .build();
     }
 }
