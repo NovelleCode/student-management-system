@@ -9,8 +9,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -30,57 +30,49 @@ public class StudentRest {
     @POST
     public Response createStudent(Student student) throws StudentAlreadyExistsException {
         studentService.createStudent(student);
-        UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(Long.toString(student.getId()));
-        return Response.created(uriBuilder.build())
-                .entity(student)
-                .build();
+        URI studentUriLocation = uriInfo.getAbsolutePathBuilder().path(Long.toString(student.getId())).build();
+        return Response.created(studentUriLocation).entity(student).build();
     }
 
     @Path("{id}")
     @GET
     public Response findStudentById(@PathParam("id") Long id) throws StudentNotFoundException {
         Student foundStudent = studentService.findStudentById(id);
-        return Response.ok(foundStudent)
-                .build();
+        return Response.ok(foundStudent).build();
     }
 
     @Path("get-all-students-by-lastname")
     @GET
     public Response findStudentByLastName(@QueryParam("lastName") String lastName) throws StudentNotFoundException {
         List<Student> foundStudents = studentService.findAllStudentsByLastName(lastName);
-        return Response.ok(foundStudents)
-                .build();
+        return Response.ok(foundStudents).build();
     }
 
     @Path("")
     @GET
     public Response getAllStudents() throws StudentNotFoundException {
         List<Student> allStudents = studentService.getAllStudents();
-        return Response.ok(allStudents)
-                .build();
+        return Response.ok(allStudents).build();
     }
 
     @Path("")
     @PUT
     public Response updateStudent(Student student) throws StudentNotFoundException {
         studentService.updateStudent(student);
-        return Response.ok(student)
-                .build();
+        return Response.ok(student).build();
     }
 
     @Path("email/{id}")
     @PATCH
     public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email) throws StudentNotFoundException {
         Student updatedStudent = studentService.updateStudentEmail(id, email);
-        return Response.ok(updatedStudent)
-                .build();
+        return Response.ok(updatedStudent).build();
     }
 
     @Path("{id}")
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id) throws StudentNotFoundException {
         studentService.deleteStudent(id);
-        return Response.ok()
-                .build();
+        return Response.ok().build();
     }
 }
