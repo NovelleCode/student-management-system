@@ -15,9 +15,8 @@ public class StudentAlreadyExistsExceptionMapper implements ExceptionMapper<Stud
 
     @Override
     public Response toResponse(StudentAlreadyExistsException e) {
-
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity(mapper.jsonMapper("409", e.getMessage()))
+        return Response.status(e.getStatusCode())
+                .entity(mapper.jsonMapper(e.getStatusCode(), e.getMessage()))
                 .type(MediaType.APPLICATION_JSON).build();
     }
 }

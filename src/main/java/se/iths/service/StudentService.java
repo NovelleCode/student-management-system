@@ -7,6 +7,7 @@ import se.iths.exception.StudentNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Transactional
@@ -16,8 +17,8 @@ public class StudentService {
     EntityManager em;
 
     public Student createStudent(Student student) {
-        if(studentAlreadyExists(student))
-            throw new StudentAlreadyExistsException("Student with this information already exists in database.");
+        if (studentAlreadyExists(student))
+            throw new StudentAlreadyExistsException(Response.Status.CONFLICT, "Student with this information already exists in database.");
         em.persist(student);
         return student;
     }
@@ -25,14 +26,14 @@ public class StudentService {
     public Student findStudentById(Long id) {
         Student foundStudent = em.find(Student.class, id);
         if (foundStudent == null)
-            throw new StudentNotFoundException("No student found with id: " + id);
+            throw new StudentNotFoundException(Response.Status.NOT_FOUND, "No student found with id: " + id);
         return foundStudent;
     }
 
     public List<Student> getAllStudents() {
         List<Student> allStudents = em.createQuery("select s from Student s", Student.class).getResultList();
-        if (allStudents.isEmpty())
-            throw new StudentNotFoundException("No students in database yet.");
+        if(allStudents.isEmpty())
+            throw new StudentNotFoundException(Response.Status.OK, "No students seem to be registered yet.");
         return allStudents;
     }
 
@@ -42,14 +43,14 @@ public class StudentService {
                 .setParameter(1, lastName)
                 .getResultList();
 
-        if(foundStudents.isEmpty())
-            throw new StudentNotFoundException("No student(s) found with lastname: " + lastName);
+        if (foundStudents.isEmpty())
+            throw new StudentNotFoundException(Response.Status.OK, "No student(s) found with lastname: " + lastName);
         return foundStudents;
     }
 
     public Student updateStudent(Student student) {
         if (findStudentById(student.getId()) == null)
-            throw new StudentNotFoundException("No student found with id: " + student.getId());
+            throw new StudentNotFoundException(Response.Status.NOT_FOUND, "No student found with id: " + student.getId());
         return em.merge(student);
     }
 

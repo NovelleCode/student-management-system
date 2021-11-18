@@ -4,10 +4,10 @@ import org.json.simple.JSONObject;
 
 public class Mapper {
 
-    public JSONObject jsonMapper(String errorCode, String message) {
+    public JSONObject jsonMapper(int statusCode, String message) {
         JSONObject json = new JSONObject();
-        json.put("httpErrorCode", errorCode);
-        json.put("errorMessage", message);
+        json.put("httpStatusCode", statusCode);
+        json.put("message", message);
         return json;
     }
 }
