@@ -39,7 +39,7 @@ In the HTTP Response Header you can also find the url location of the newly adde
 }
 ```
 
-###GET http://localhost:8080/student-management-system/api/v1/students/  
+### GET http://localhost:8080/student-management-system/api/v1/students/  
 Gets all students from the database.
 
 #### Responses
@@ -148,9 +148,9 @@ Replaces student with the information provided in the request body. Returns requ
 }
 ```
 
-###PATCH http://localhost:8080/student-management-system/api/v1/students/email/{id}
+### PATCH http://localhost:8080/student-management-system/api/v1/students/email/{id}
 Patches the student email by entering the students' id in the url and entering the new email as a query parameter in the url. 
-Returns the updated information in the response body when status code is 200 OK.
+Returns the updated information in the response body when status code is 200 OK.  
 e.g. `http://localhost:8080/student-management-system/api/v1/students/email/2?email=jabarriedson%40outlook.com`
 
 #### Responses
