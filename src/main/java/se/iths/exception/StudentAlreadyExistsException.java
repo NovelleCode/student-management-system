@@ -7,9 +7,9 @@ import javax.ws.rs.core.Response;
 public class StudentAlreadyExistsException extends RuntimeException {
     private final Response.Status statusCode;
 
-    public StudentAlreadyExistsException(Response.Status statusCode, String message) {
+    public StudentAlreadyExistsException(String message) {
         super(message);
-        this.statusCode = statusCode;
+        this.statusCode = Response.Status.CONFLICT;
     }
 
     public int getStatusCode() {

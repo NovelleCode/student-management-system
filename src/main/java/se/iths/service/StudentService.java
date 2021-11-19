@@ -18,7 +18,7 @@ public class StudentService {
 
     public Student createStudent(Student student) {
         if (studentAlreadyExists(student))
-            throw new StudentAlreadyExistsException(Response.Status.CONFLICT, "Student with this information already exists in database.");
+            throw new StudentAlreadyExistsException("Student with this information already exists in database.");
         em.persist(student);
         return student;
     }
