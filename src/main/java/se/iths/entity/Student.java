@@ -1,10 +1,9 @@
 package se.iths.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,17 +12,16 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @NotEmpty
     private String firstName;
-
     @NotEmpty
     private String lastName;
-
     @NotEmpty
     private String email;
-
     private String phoneNumber;
+
+    @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
+    private List<Subject> subjects = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -63,6 +61,15 @@ public class Student {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void addSubject(Subject subject) {
+        subject.addStudentByStudent(this);
+        subjects.add(subject);
     }
 
     @Override
