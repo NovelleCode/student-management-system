@@ -41,9 +41,9 @@ Returns student information that match requested student id.
 - **404 - Not found**  
 Student with requested id does not exist in database.
 
-### GET http://localhost:8080/student-management-system/api/v1/students/get-all-by-lastname
+### GET http://localhost:8080/student-management-system/api/v1/students/search
 Gets all students by last name by adding query parameter lastName to the request.  
-e.g. `http://localhost:8080/student-management-system/api/v1/students/get-all-by-lastname?lastName=Beckstead`
+e.g. `http://localhost:8080/student-management-system/api/v1/students/search?lastName=Beckstead`
 #### Responses
 - **200 - OK**  
 Returns a list of students that match the requested last name.
@@ -68,9 +68,9 @@ Newly provided student information is merged in database and request body is ret
 - **404 - Not found**  
 Student id sent in request body is not found in database.
 
-### PATCH http://localhost:8080/student-management-system/api/v1/students/email/{id}
+### PATCH http://localhost:8080/student-management-system/api/v1/students/{id}
 Patches the students' email by entering the students' id in the url and entering the new email address as a query parameter in the url.
-e.g. `http://localhost:8080/student-management-system/api/v1/students/email/1?email=jabarriedson%40outlook.com`
+e.g. `http://localhost:8080/student-management-system/api/v1/students/1?email=jabarriedson%40outlook.com`
 
 #### Responses
 - **200 - OK**  

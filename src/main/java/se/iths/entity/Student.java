@@ -64,7 +64,7 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    // @JsonbTransient
+    @JsonbTransient
     public List<Subject> getSubjects() {
         return subjects;
     }

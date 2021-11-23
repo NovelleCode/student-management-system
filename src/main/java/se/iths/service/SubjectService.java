@@ -5,6 +5,8 @@ import se.iths.entity.Subject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Transactional
@@ -23,6 +25,9 @@ public class SubjectService {
     }
 
     public Subject findSubjectById(Long id) {
-        return em.find(Subject.class, id);
+        Subject foundSubject = em.find(Subject.class, id);
+        if(foundSubject == null)
+            throw new WebApplicationException("Subject not found", Response.Status.NOT_FOUND);
+        return foundSubject;
     }
 }

@@ -41,7 +41,7 @@ public class StudentRest {
         return Response.ok(foundStudent).build();
     }
 
-    @Path("get-all-by-lastname")
+    @Path("search")
     @GET
     public Response findStudentByLastName(@QueryParam("lastName") String lastName) throws StudentNotFoundException {
         List<Student> foundStudents = studentService.findAllStudentsByLastName(lastName);
@@ -62,7 +62,7 @@ public class StudentRest {
         return Response.ok(student).build();
     }
 
-    @Path("email/{id}")
+    @Path("{id}")
     @PATCH
     public Response updateStudentEmail(@PathParam("id") Long id, @QueryParam("email") String email) throws StudentNotFoundException {
         Student updatedStudent = studentService.updateStudentEmail(id, email);
@@ -74,5 +74,12 @@ public class StudentRest {
     public Response deleteStudent(@PathParam("id") Long id) throws StudentNotFoundException {
         studentService.deleteStudent(id);
         return Response.noContent().build();
+    }
+
+    @Path("/{studentId}/subjects/{subjectId}")
+    @POST
+    public Response addSubjectToStudent(@PathParam("studentId") Long studentId, @PathParam("subjectId") Long subjectId) throws StudentNotFoundException  {
+        Student updatedStudent = studentService.addSubjectToStudent(studentId, subjectId);
+        return Response.ok(updatedStudent).build();
     }
 }

@@ -30,7 +30,7 @@ public class Subject {
         this.name = name;
     }
 
-    // @JsonbTransient
+    //@JsonbTransient
     public List<Student> getStudents() {
         return students;
     }
