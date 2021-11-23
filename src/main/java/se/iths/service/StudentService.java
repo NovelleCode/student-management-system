@@ -18,9 +18,6 @@ public class StudentService {
     @PersistenceContext
     EntityManager em;
 
-    @Inject
-    SubjectService subjectService;
-
     public Student createStudent(Student student) {
         if (studentAlreadyExists(student))
             throw new StudentAlreadyExistsException("Student with this information already exists in database.");
@@ -75,15 +72,5 @@ public class StudentService {
                 .setParameter(1, student.getFirstName()).setParameter(2, student.getLastName()).setParameter(3, student.getEmail())
                 .getResultList();
         return !studentExists.isEmpty();
-    }
-
-    public Student addSubjectToStudent(Long studentId, Long subjectId) {
-        Student foundStudent  = findStudentById(studentId);
-        Subject foundSubject = subjectService.findSubjectById(subjectId);
-
-        foundStudent.addSubject(foundSubject);
-
-        em.persist(foundStudent);
-        return foundStudent;
     }
 }

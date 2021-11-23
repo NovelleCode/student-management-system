@@ -70,7 +70,6 @@ public class Student {
     }
 
     public void addSubject(Subject subject) {
-        subject.addStudentByStudent(this);
         subjects.add(subject);
     }
 

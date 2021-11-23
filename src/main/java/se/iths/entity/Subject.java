@@ -35,7 +35,8 @@ public class Subject {
         return students;
     }
 
-    public void addStudentByStudent(Student student) {
+    public void addStudent(Student student) {
+        student.addSubject(this);
         students.add(student);
     }
 }

@@ -1,6 +1,8 @@
 package se.iths.rest;
 
+import se.iths.entity.Student;
 import se.iths.entity.Subject;
+import se.iths.exception.StudentNotFoundException;
 import se.iths.service.SubjectService;
 
 import javax.inject.Inject;
@@ -36,5 +38,13 @@ public class SubjectRest {
     public Response findSubjectById(@PathParam("id") Long id) {
         Subject foundSubject = subjectService.findSubjectById(id);
         return Response.ok(foundSubject).build();
+    }
+
+
+    @Path("/{subjectId}/students/{studentId}")
+    @POST
+    public Response addStudentToSubject(@PathParam("subjectId") Long subjectId, @PathParam("studentId") Long studentId)  throws StudentNotFoundException {
+        Subject updatedSubject = subjectService.addStudentToSubject(subjectId, studentId);
+        return Response.ok(updatedSubject).build();
     }
 }

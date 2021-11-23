@@ -75,11 +75,4 @@ public class StudentRest {
         studentService.deleteStudent(id);
         return Response.noContent().build();
     }
-
-    @Path("/{studentId}/subjects/{subjectId}")
-    @POST
-    public Response addSubjectToStudent(@PathParam("studentId") Long studentId, @PathParam("subjectId") Long subjectId) throws StudentNotFoundException  {
-        Student updatedStudent = studentService.addSubjectToStudent(studentId, subjectId);
-        return Response.ok(updatedStudent).build();
-    }
 }
