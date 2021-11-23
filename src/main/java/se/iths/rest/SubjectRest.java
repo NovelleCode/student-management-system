@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("subjects")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,6 +22,13 @@ public class SubjectRest {
     public Response createSubject(Subject subject) {
         Subject subjectResult = subjectService.createSubject(subject);
         return Response.ok(subjectResult).build();
+    }
+
+    @Path("")
+    @GET
+    public Response getAllSubjects() {
+        List<Subject> subjects = subjectService.getAllSubjects();
+        return Response.ok(subjects).build();
     }
 
     @Path("{id}")
