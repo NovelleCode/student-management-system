@@ -39,11 +39,17 @@ public class SubjectRest {
         return Response.ok(foundSubject).build();
     }
 
-
     @Path("/{subjectId}/students/{studentId}")
     @POST
     public Response addStudentToSubject(@PathParam("subjectId") Long subjectId, @PathParam("studentId") Long studentId)  throws StudentNotFoundException {
         Subject updatedSubject = subjectService.addStudentToSubject(subjectId, studentId);
+        return Response.ok(updatedSubject).build();
+    }
+
+    @Path("/{subjectId}/teachers/{teacherId}")
+    @POST
+    public Response addTeacherToSubject(@PathParam("subjectId") Long subjectId, @PathParam("teacherId") Long teacherId) {
+        Subject updatedSubject = subjectService.addTeacherToSubject(subjectId, teacherId);
         return Response.ok(updatedSubject).build();
     }
 }

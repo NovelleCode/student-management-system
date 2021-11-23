@@ -12,6 +12,8 @@ public class Subject {
     private String name;
     @ManyToMany
     private List<Student> students = new ArrayList<>();
+    @ManyToOne
+    private Teacher teacher;
 
     public Long getId() {
         return id;
@@ -34,8 +36,21 @@ public class Subject {
         return students;
     }
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
     public void addStudent(Student student) {
         student.addSubject(this);
         students.add(student);
+    }
+
+    public void addTeacher(Teacher teacher) {
+        teacher.addSubject(this);
+        setTeacher(teacher);
     }
 }

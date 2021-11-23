@@ -34,6 +34,13 @@ public class StudentRest {
         return Response.created(studentUriLocation).entity(student).build();
     }
 
+    @Path("")
+    @GET
+    public Response getAllStudents() throws StudentNotFoundException {
+        List<Student> allStudents = studentService.getAllStudents();
+        return Response.ok(allStudents).build();
+    }
+
     @Path("{id}")
     @GET
     public Response findStudentById(@PathParam("id") Long id) throws StudentNotFoundException {
@@ -46,13 +53,6 @@ public class StudentRest {
     public Response findStudentByLastName(@QueryParam("lastName") String lastName) throws StudentNotFoundException {
         List<Student> foundStudents = studentService.findAllStudentsByLastName(lastName);
         return Response.ok(foundStudents).build();
-    }
-
-    @Path("")
-    @GET
-    public Response getAllStudents() throws StudentNotFoundException {
-        List<Student> allStudents = studentService.getAllStudents();
-        return Response.ok(allStudents).build();
     }
 
     @Path("")

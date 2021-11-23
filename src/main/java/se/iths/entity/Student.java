@@ -20,7 +20,6 @@ public class Student {
     @NotEmpty
     private String email;
     private String phoneNumber;
-
     @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
     private List<Subject> subjects = new ArrayList<>();
 

@@ -1,11 +1,9 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
-import se.iths.entity.Subject;
 import se.iths.exception.StudentAlreadyExistsException;
 import se.iths.exception.StudentNotFoundException;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -25,18 +23,18 @@ public class StudentService {
         return student;
     }
 
-    public Student findStudentById(Long id) {
-        Student foundStudent = em.find(Student.class, id);
-        if (foundStudent == null)
-            throw new StudentNotFoundException(Response.Status.NOT_FOUND, "No student found with id: " + id);
-        return foundStudent;
-    }
-
     public List<Student> getAllStudents() {
         List<Student> allStudents = em.createQuery("select s from Student s", Student.class).getResultList();
         if(allStudents.isEmpty())
             throw new StudentNotFoundException(Response.Status.OK, "No students seem to be registered yet.");
         return allStudents;
+    }
+
+    public Student findStudentById(Long id) {
+        Student foundStudent = em.find(Student.class, id);
+        if (foundStudent == null)
+            throw new StudentNotFoundException(Response.Status.NOT_FOUND, "No student found with id: " + id);
+        return foundStudent;
     }
 
     public List<Student> findAllStudentsByLastName(String lastName) {
