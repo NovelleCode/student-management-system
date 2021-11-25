@@ -2,13 +2,14 @@ package se.iths.exception;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
-public class StudentAlreadyExistsException extends RuntimeException {
+public class StudentAlreadyExistsException extends WebApplicationException {
     private final Response.Status statusCode;
 
     public StudentAlreadyExistsException(String message) {
-        super(message);
+        super(message, Response.Status.CONFLICT);
         this.statusCode = Response.Status.CONFLICT;
     }
 

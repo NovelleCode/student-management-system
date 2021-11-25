@@ -5,8 +5,11 @@ import se.iths.service.TeacherService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 
 @Path("teachers")
@@ -17,11 +20,15 @@ public class TeacherRest {
     @Inject
     TeacherService teacherService;
 
+    @Context
+    UriInfo uriInfo;
+
     @Path("")
     @POST
     public Response createTeacher(Teacher teacher) {
         Teacher teacherResult = teacherService.createTeacher(teacher);
-        return Response.ok(teacherResult).build();
+        URI teacherUriLocation = uriInfo.getAbsolutePathBuilder().path(Long.toString(teacher.getId())).build();
+        return Response.created(teacherUriLocation).entity(teacherResult).build();
     }
 
     @Path("")

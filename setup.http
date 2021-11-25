@@ -1,0 +1,96 @@
+### CREATING STUDENTS
+POST http://localhost:8080/student-management-system/api/v1/students
+Content-Type: application/json
+
+{
+	"email": "johnnybear@mail.com",
+	"firstName": "Johnny",
+	"lastName": "Bear",
+	"phoneNumber": "0701234567"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/students
+Content-Type: application/json
+
+{
+  "email": "jennysmith@mail.com",
+  "firstName": "Jenny",
+  "lastName": "Smith",
+  "phoneNumber": "0705397106"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/students
+Content-Type: application/json
+
+{
+  "email": "robertfalk@mail.com",
+  "firstName": "Robert",
+  "lastName": "Falk",
+  "phoneNumber": "0707654320"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/students
+Content-Type: application/json
+
+{
+  "email": "tracyanderson@mail.com",
+  "firstName": "Tracy",
+  "lastName": "Anderson"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/students
+Content-Type: application/json
+
+{
+  "email": "peterdiedrich@mail.com",
+  "firstName": "Peter",
+  "lastName": "Diedrich"
+}
+
+
+### CREATING TEACHERS
+POST http://localhost:8080/student-management-system/api/v1/teachers
+Content-Type: application/json
+
+{
+  "firstName": "Henry",
+  "lastName": "Beetle"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/teachers
+Content-Type: application/json
+
+{
+  "firstName": "Mary",
+  "lastName": "Leonard"
+}
+
+
+### CREATING SUBJECTS
+POST http://localhost:8080/student-management-system/api/v1/subjects
+Content-Type: application/json
+
+{
+	"name": "Geography"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/subjects
+Content-Type: application/json
+
+{
+  "name": "Mathematics"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/subjects
+Content-Type: application/json
+
+{
+  "name": "Physics"
+}
+###
+POST http://localhost:8080/student-management-system/api/v1/subjects
+Content-Type: application/json
+
+{
+  "name": "English"
+}
